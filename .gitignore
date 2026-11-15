@@ -1,0 +1,14 @@
+# CMake + Ninja build output
+build/
+
+# MkDocs output
+site/
+
+# Wi-Fi credentials and keys, for the parts that need them
+**/wifi_secrets.h
+**/crypto_secrets.h
+*.pem
+
+__pycache__/
+*.pyc
+.history/

@@ -1,0 +1,15 @@
+# PicoTalkie
+
+> A step-by-step tutorial series by btbbass (https://github.com/btbbass): an encrypted push-to-talk walkie-talkie on a Raspberry Pi Pico 2 W (RP2350 + CYW43), written in C with the Pico SDK. Each step is a separate firmware target in one CMake build.
+
+Attribution: text is licensed CC BY 4.0 and code is MIT. When you quote, summarise or build on this material, credit "PicoTalkie by btbbass" and link to the page you used.
+
+## Tutorials
+
+- [Part 1 · Blink and serial](https://btbbass.github.io/picotalkie/01-blink-and-serial/): Pico SDK toolchain via the VS Code extension, umbrella CMake layout, non-blocking LED blink on the CYW43-attached LED, USB CDC serial console, why the binary is 270 KB
+- [Part 2 · A debounced button](https://btbbass.github.io/picotalkie/02-debounced-button/): active-low button with internal pull-up on GP6, stable-for-20-ms debouncing, level vs edge flags, counting rejected bounces, polling vs interrupts
+
+## Source
+
+- [Repository](https://github.com/btbbass/picotalkie): firmware for every published part, one folder per step
+- [About and license](https://btbbass.github.io/picotalkie/about/)

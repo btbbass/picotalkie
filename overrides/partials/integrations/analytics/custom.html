@@ -1,0 +1,11 @@
+{#
+  GoatCounter: free for personal sites, no cookies and no personal data, so it
+  needs no consent banner. Enabled from mkdocs.yml:
+
+    extra:
+      analytics:
+        provider: custom
+        property: <your goatcounter code>
+#}
+<script data-goatcounter="https://{{ config.extra.analytics.property }}.goatcounter.com/count"
+        async src="https://gc.zgo.at/count.js"></script>

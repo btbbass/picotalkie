@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{#
+  Two things every page gets, both about being credited:
+
+  1. JSON-LD (schema.org) metadata naming the author and the licence. Search
+     engines read it, and so do the AI search tools that quote and link pages.
+  2. An attribution line inside the article body itself. Scrapers usually strip
+     the header, nav and footer and keep the article, so a credit that lives
+     only in the footer is the first thing to go. This one travels with the
+     text.
+#}
+
+{% block extrahead %}
+  {{ super() }}
+  {% if page and page.title %}
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "headline": {{ page.title | tojson }},
+    "description": {{ (page.meta.description or config.site_description) | tojson }},
+    "url": {{ page.canonical_url | tojson }},
+    "inLanguage": "en",
+    "author": {
+      "@type": "Person",
+      "name": {{ config.site_author | tojson }},
+      "url": {{ config.extra.author_url | tojson }}
+    },
+    "license": "https://creativecommons.org/licenses/by/4.0/",
+    "isPartOf": {
+      "@type": "CreativeWorkSeries",
+      "name": {{ config.site_name | tojson }},
+      "url": {{ config.site_url | tojson }}
+    }
+  }
+  </script>
+  {% endif %}
+{% endblock %}
+
+{% block content %}
+  {{ super() }}
+  {% if page and not page.is_homepage %}
+  <hr>
+  <p class="attribution">
+    <small>
+      <strong>{{ config.site_name }}</strong> by
+      <a href="{{ config.extra.author_url }}">{{ config.site_author }}</a> &middot;
+      Original page: <a href="{{ page.canonical_url }}">{{ page.canonical_url }}</a>.
+      Text licensed <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>:
+      you may reuse it, including commercially, as long as you credit the author and link back.
+      Code is MIT.
+    </small>
+  </p>
+  {% if config.extra.kofi %}
+  <p class="support">
+    <small>
+      Found this useful? You can
+      <a href="{{ config.extra.kofi }}">buy me a coffee on Ko-fi</a>.
+      It pays for parts and PCBs for the next steps.
+    </small>
+  </p>
+  {% endif %}
+  {% endif %}
+{% endblock %}
