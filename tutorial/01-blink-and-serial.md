@@ -26,12 +26,11 @@ the hardware, because every later part runs inside the same kind of loop.
 
 ## The big picture
 
-Every part of this series uses the same four steps. You **edit** C code in
-VS Code. You **build** it into a `.uf2` file. You **flash** that file onto the
-board. Then you **watch** what happens: the LED, and the text the board prints
-over USB.
-
-This part sets up all four, then reads the ten lines of code in the middle.
+Every part of this series uses the same four actions, in order to program the
+board. At first, you are asked to **edit** your code in C, in VS Code, and to
+compile and **build** it. Once that is done, you will be able to **flash** it
+into the board, and to **observe** what happens: in this case, the LED that
+blinks, and the output text the board prints over USB.
 
 ![A cycle of four steps: edit in VS Code, build a .uf2 with tools/build.sh, flash it with BOOTSEL, then watch the LED and the serial console](assets/part-01/d1-loop.svg){ .diagram loading=lazy }
 

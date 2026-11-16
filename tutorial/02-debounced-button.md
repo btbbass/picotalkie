@@ -221,10 +221,10 @@ level changes. The main loop uses both:
 ```
 
 The LED follows the level, through the wireless chip as in
-[part 1](01-blink-and-serial.md#4-a-loop-that-never-waits). The `printf` runs
-on edges. The transmitter in later parts needs the same split. It keeps
-sending while the button is held (the level), and starts and stops the stream
-when it changes (the edges).
+[part 1](01-blink-and-serial.md#4-a-loop-that-never-waits), while the `printf`
+runs only on the edges. Later on, the transmitter will need the same split,
+because it keeps sending while the button is held (the level), and it starts
+and stops the stream when the button changes (the edges).
 
 <a id="why-poll-instead-of-using-an-interrupt"></a>
 
