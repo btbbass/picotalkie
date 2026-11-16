@@ -107,13 +107,21 @@ while (true) {
 }
 ```
 
-This works, but during `sleep_ms(800)` the CPU does nothing else. On a PC,
-the operating system would give the CPU to another program while yours
-sleeps. Here there's no operating system and no other program, so nothing
-runs until the sleep ends.
+This works, but while the CPU is inside `sleep_ms(800)` it does nothing else,
+and it waits for almost a second before it can do anything useful again.
 
-For a blink this doesn't matter. In part 4 the same loop has to collect audio
-every 20 ms, and an 800 ms pause would lose 40 audio blocks.
+On a PC you would not notice it, because the operating system sees that your
+program is sleeping, and it gives the CPU to another program in the meantime,
+so the computer keeps working. Here, instead, there is no operating system and
+there is no other program, because our code is the only thing running on the
+chip, so when it waits, the whole board waits with it, and nothing else can
+happen until the sleep ends.
+
+For a blinking LED this does not really matter, since nobody notices if the
+board is idle in between. It starts to matter later in the series, though,
+because in part 4 the same loop has to collect a block of audio from the
+microphone every 20 ms. A pause of 800 ms there would lose 40 of those
+blocks, and you would hear it as a hole of almost a second in the voice.
 
 ## 4. A loop that never waits
 
