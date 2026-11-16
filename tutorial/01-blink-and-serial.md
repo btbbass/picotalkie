@@ -75,15 +75,49 @@ cd picotalkie
 code .
 ```
 
-Every part is a folder, and one CMake build compiles them all:
+The whole series lives in this repository, so once you have cloned it and
+opened it in VS Code, you have every part published so far on your disk, each
+one in its own folder and all compiled by the same CMake build:
 
 ```text
 picotalkie/
-├── CMakeLists.txt     board choice, SDK set-up, list of steps
-├── step_01/           this part
-├── step_02/           the next one
-└── build/             created by the first build
+├── CMakeLists.txt          the board, the SDK, and the list of steps to build
+├── pico_sdk_import.cmake   finds the Pico SDK (it comes from the SDK itself)
+├── common/                 code shared between steps (still empty)
+├── step_01/                this part: main.c and its own CMakeLists.txt
+├── step_02/                part 2, the debounced button
+├── tools/build.sh          builds from a terminal, with the extension's tools
+├── .vscode/                tells the Pico extension where everything is
+├── tutorial/               the pages you are reading now
+└── build/                  created by the first build, and never committed
 ```
+
+The file that ties everything together is the `CMakeLists.txt` at the top. It
+chooses the board (`pico2_w`), it brings in the SDK through
+`pico_sdk_import.cmake`, and at the bottom it has one line for each step, so
+every time a new part is published, a new folder appears and one line is added
+there.
+
+Each `step_NN/` folder has its own small `CMakeLists.txt`, which describes
+only its program: which `.c` files it has, which SDK libraries it uses, and
+that `printf` goes over USB.
+
+The other folders are quieter for now. `common/` is empty, and it will start
+filling up when two parts need the same code, for example to connect to
+Wi-Fi.
+
+`tools/build.sh` and `.vscode/` are two ways to reach the same
+toolchain, one from a terminal and one from the buttons of the extension, and
+we use both in [step 5](#5-build). The rest (`tutorial/`, `mkdocs.yml`,
+`overrides/` and `includes/`) is the source of this site, so if you find a
+mistake in a page, you can also find it there.
+
+!!! note "More about this in the first intermezzo"
+    Why the order of the few lines in that top `CMakeLists.txt` matters, and
+    what really happens between your `.c` file and the `.uf2` you will flash,
+    deserves more than a paragraph. We come back to it in the first
+    intermezzo, after part 2, once you have built two programs and have their
+    files in front of you.
 
 The first time you open the folder, the Pico extension fetches the SDK and
 toolchain versions that `CMakeLists.txt` asks for. That can take a few
