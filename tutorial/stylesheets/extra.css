@@ -1,0 +1,12 @@
+/* Excalidraw diagrams (tutorial/assets/part-NN/*.svg).
+   They are drawn for a light background. On the dark theme, invert them and
+   turn the hues back by half a circle, so the ink becomes light and the
+   orange accent stays orange. */
+img.diagram {
+  display: block;
+  margin: 1.2em auto 0.4em;
+}
+
+[data-md-color-scheme="slate"] img.diagram {
+  filter: invert(0.9) hue-rotate(180deg);
+}

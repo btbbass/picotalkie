@@ -33,13 +33,7 @@ over USB.
 
 This part sets up all four, then reads the ten lines of code in the middle.
 
-```mermaid
-flowchart LR
-  E["Edit<br/>VS Code"] --> B["Build<br/>tools/build.sh"]
-  B -- ".uf2" --> F["Flash<br/>BOOTSEL + drag"]
-  F --> W["Watch<br/>LED + serial console"]
-  W --> E
-```
+![A cycle of four steps: edit in VS Code, build a .uf2 with tools/build.sh, flash it with BOOTSEL, then watch the LED and the serial console](assets/part-01/d1-loop.svg){ .diagram loading=lazy }
 
 *The `.uf2` file is the only thing that travels from your computer to the board.*
 
@@ -101,8 +95,8 @@ minutes.
 
 ## 3. The obvious blink
 
-Most blink examples look like this. It isn't in the repository: it's the
-version to avoid.
+Most blink examples look like the code below, which I left out of the
+repository on purpose, because it is the version we want to avoid.
 
 ```c title="The textbook blink (not in the repository)"
 while (true) {
@@ -192,10 +186,7 @@ pressed?
     defined, returning from `main()` reboots the board into BOOTSEL mode,
     ready for the next `.uf2`.
 
-```mermaid
-flowchart LR
-  R["RP2350<br/>your code"] -- SPI --> C["CYW43439<br/>wireless chip"] --> L(("LED"))
-```
+![The RP2350 talks to the CYW43439 wireless chip over SPI, on GP23, GP24, GP25 and GP29, and the LED is connected to the wireless chip's WL_GPIO0](assets/part-01/d2-led.svg){ .diagram loading=lazy }
 
 *Every change to the LED is a command sent to the wireless chip over SPI.*
 

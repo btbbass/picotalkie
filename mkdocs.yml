@@ -71,6 +71,10 @@ extra:
       link: https://github.com/btbbass/picotalkie
       name: Source code on GitHub
 
+# Diagram styling, including the dark-theme version of the Excalidraw SVGs.
+extra_css:
+  - stylesheets/extra.css
+
 markdown_extensions:
   - admonition
   - attr_list

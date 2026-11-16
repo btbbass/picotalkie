@@ -45,12 +45,7 @@ and the rest of our program. It reads the raw values and turns them into two
 things we can use: a *level* (is the button held down right now?) and *edges*
 (did it change on this pass of the loop?).
 
-```mermaid
-flowchart LR
-  B["Button"] --> P["GP6<br/>internal pull-up"] --> D["button_update()<br/>debouncer"]
-  D --> L["pressed<br/>level"] --> LED(("LED"))
-  D --> E["edge_down / edge_up<br/>edges"] --> C["printf"]
-```
+![A button feeds GP6. The raw reading goes through the debouncer, which outputs a pressed level that drives the LED, and press and release edges that drive the console](assets/part-02/d3-signal-chain.svg){ .diagram loading=lazy }
 
 *The LED follows the level, and the console prints on edges.*
 
@@ -87,6 +82,10 @@ Build `step_02` and flash it as in part 1 ([build](01-blink-and-serial.md#5-buil
 
 **You should see:** the LED on while you hold the button. With a multimeter
 between GP6 and GND: 3.3 V released, 0 V pressed.
+
+![A push button across the breadboard's centre gap, wired on diagonally opposite legs to physical pins 9 (GP6) and 8 (GND) of the Pico 2 W](assets/part-02/d4-wiring.svg){ .diagram loading=lazy }
+
+*GP6 (pin 9) to one leg, GND (pin 8) to the diagonal leg. No resistor.*
 
 <a id="why-no-resistor"></a>
 
@@ -127,6 +126,10 @@ PTT down @   4211 ms  (0 bounces rejected)
 When two metal contacts close, they hit, spring apart and hit again for a few
 milliseconds. The program reads the pin much faster than that, so it reports
 every hit as a press or a release.
+
+![The timing of one press: GP6 toggles several times in the first milliseconds, then stays low, and the debouncer reports the press 20 ms after the last toggle](assets/part-02/d5-bounce.svg){ .diagram loading=lazy }
+
+*The press is reported 20 ms after the last bounce.*
 
 ## 3. Debounce with the 20 ms rule
 
